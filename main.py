@@ -8,7 +8,6 @@ from umqtt.simple import MQTTClient
 # =========================
 SSID = "Wokwi-GUEST"
 SENHA = ""
-
 # =========================
 # MQTT
 # =========================
@@ -17,14 +16,13 @@ CLIENT_ID = f"sigh_mackenzie_luiz_2026"
 TOPICO_UMIDADE = b"mackenzie/luizferreira/projeto2026/umidade"
 TOPICO_COMANDO = b"mackenzie/luizferreira/projeto2026/comando"
 TOPICO_STATUS = b"mackenzie/luizferreira/projeto2026/status"
-
 # =========================
 # HARDWARE
 # =========================
 sensor = ADC(Pin(34))
 sensor.atten(ADC.ATTN_11DB)
 valvula = Pin(5, Pin.OUT)
-valvula.value(1)
+valvula.value(1)  # Inicialmente desligada (HIGH)
 
 # =========================
 # LCD I2C
@@ -188,6 +186,7 @@ def verifica_mensagens():
 # =========================
 MOLHADO = 0     # Valor mínimo do potenciômetro
 SECO = 4095     # Valor máximo do potenciômetro
+UMIDADE_MINIMA = 30  # Umidade mínima para ativar os irrigadores
 
 def ler_umidade():
     valor = sensor.read()
@@ -210,5 +209,21 @@ while True:
     verifica_mensagens()
     umidade = ler_umidade()
     print("Umidade:", umidade)
+    
+    if umidade < UMIDADE_MINIMA:
+        lcd_clear()
+        lcd_print("Ativando")
+        lcd_set_cursor(0, 1)
+        lcd_print("Irrigadores...")
+        valvula.value(0)  # Liga os irrigadores
+        client.publish(TOPICO_STATUS, b"IRRI_ON")
+    else:
+        lcd_clear()
+        lcd_print(f"Umidade: {umidade}%")
+        lcd_set_cursor(0, 1)
+        lcd_print("Irrigadores OFF")
+        valvula.value(1)  # Desliga os irrigadores
+        client.publish(TOPICO_STATUS, b"IRRI_OFF")
+    
     client.publish(TOPICO_UMIDADE, str(umidade).encode())
     time.sleep(10)  # Aguarde 10 segundos antes de enviar a próxima leitura
