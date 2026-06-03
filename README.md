@@ -14,14 +14,16 @@ Este projeto utiliza um microcontrolador ESP32 para monitorar a umidade através
 ## Configurações Iniciais
 
 ### Conexões Hardware
+1. Plataforma utilizada
+   - Wowki Simulator
 
-1. **Potenciômetro**:
+2. **Potenciômetro**:
    - Ligado ao pino ADC34 do ESP32.
    
-2. **Valvula (GPIO)**:
+3. **Valvula (GPIO)**:
    - Controlada pelo pino GPIO5 do ESP32.
 
-3. **Display LCD I2C**:
+4. **Display LCD I2C**:
    - SCL ligado ao pino GPIO22.
    - SDA ligado ao pino GPIO21.
 
@@ -33,6 +35,7 @@ Este projeto utiliza um microcontrolador ESP32 para monitorar a umidade através
 ### Configurações MQTT
 
 - **Broker**: `test.mosquitto.org` (broker público para testes).
+- **MQTT Explorer** 
 - **Client ID**: Gerado dinamicamente com um timestamp.
 - **Topicos**:
   - Umidade: `mackenzie/luizferreira/projeto2026/umidade`
