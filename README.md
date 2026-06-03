@@ -87,6 +87,8 @@ Este projeto utiliza um microcontrolador ESP32 para monitorar a umidade através
    - A valvula será ativada (GPIO5 alto).
    - Publique um comando `OFF` para desativar a valvula.
 
+##Link projeto Wowki
+https://wokwi.com/projects/461305089814576129
 
 ## Contribuições
 
