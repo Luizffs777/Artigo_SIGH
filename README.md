@@ -90,6 +90,9 @@ Este projeto utiliza um microcontrolador ESP32 para monitorar a umidade através
 ## Link projeto Wowki
 https://wokwi.com/projects/461305089814576129
 
+## Video Demonstrativo projeto
+https://youtu.be/88W1yvK_SeM
+
 ## Contribuições
 
 Contribuições são bem-vindas! Abra uma issue ou faça um pull request com suas sugestões e melhorias.
